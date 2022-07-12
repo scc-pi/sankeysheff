@@ -1,0 +1,37 @@
+h1.title {
+  font-size: 22px;
+  font-weight: bold;
+}
+h1 { 
+  font-size: 20px;
+  font-weight: bold;
+}
+h2 { 
+  font-size: 18px;
+  font-weight: bold;
+}
+h3 { 
+  font-size: 16px;
+  font-weight: bold;
+}
+h4 { 
+  font-size: 14px;
+  font-weight: bold;
+}
+h4.author { 
+  font-size: 14px;
+  font-style: italic;
+}
+h4.date { 
+  font-size: 14px;
+  font-style: italic;
+}
+p.q {
+  color: grey;
+  font-style: italic;
+}
+blockquote {
+  color: grey;
+  font-size: 13px;
+  padding: 4px 4px;
+}

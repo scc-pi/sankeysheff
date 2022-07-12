@@ -1,0 +1,94 @@
+---
+title: "Using Sankey diagrams"
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+author: BI Team, Sheffield City Council
+output: 
+  html_document: 
+    css: "resources/style.css"
+    code_folding: show
+    theme: paper
+    toc: yes
+    toc_depth: 4
+    number_sections: true
+    toc_float: 
+      collapsed: false
+---
+
+[*View source*](https://github.com/scc-pi/sankeysheff/blob/main/sankey.Rmd) ![](resources/octocat.png){width="24"}
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+# Packages ----
+library(tidyverse)
+library(scales)
+library(viridis)
+library(patchwork)
+library(hrbrthemes)
+library(circlize)
+library(networkD3)
+library(gt)
+library(gtExtras)
+```
+
+# Introduction  
+
+The purpose of these notes is to explore how to use Sankey diagrams via R. In particular, for the Early Intervention Programme (EIP).  
+
+## networkD3  
+
+These notes are going to focus on using the networkD3 R package: 
+[christophergandrud.github.io/networkD3/](https://christophergandrud.github.io/networkD3/).
+
+Other Sankey and Alluvial specific packages were considered. However, networkD3 seemed the best bet in terms of package maintenance and examples. Plus, familiarity with the package could help us produce other types of network diagrams. Consideration of other packages was not especially thorough.
+
+The example followed initially in the Children's Early Help (CEH) project as part of the EIP programme was:
+[Most basic Sankey Diagram – the R Graph Gallery (r-graph-gallery.com)](https://r-graph-gallery.com/321-introduction-to-interactive-sankey-diagram-2.html)
+
+# Sankey example  
+
+We've had some reasonable initial Sankey outputs in CEH. As ever though, there's room to improve how legible our code is and at the same we're starting to look into a level of control that requires Javascript.  
+
+We're going to look at a couple of things initially: 
+
+1. A good outline of the Sankey process using the networkD3 package - 
+[RPubs - Introduction to Creating Sankey diagrams for Educational Research In R](https://rpubs.com/droach/CPP526-codethrough).  
+1. Using the [igraph R package](https://igraph.org/r/) as suggested by the [networkD3 documentation](https://christophergandrud.github.io/networkD3/#igraph).
+
+## Sample data 
+
+```{r ceh-simple-png}
+#| echo=FALSE,
+#| out.width="60%",
+#| out.extra = 'style="float:right; padding:10px"' 
+knitr::include_graphics("resources/EH-Map-v.simple.png")
+```
+
+Following the groupings we have of children that receive either Early Help or Social Care interventions.
+
+```{r sample-data, class.source="fold-hide"}
+# Create a data frame of sample data
+ceh <- tribble(
+  ~GROUP,      ~CHILDREN,     
+  "1 SC",     4000,
+  "2 EH SC",  4000,
+  "3 EH",     22000
+)
+
+# Display table
+ceh %>% 
+  gt %>% 
+  gt_theme_538() %>% 
+  fmt_number(columns = CHILDREN, decimals = 0, use_seps = TRUE) %>% 
+  tab_options(table.font.size = 12) 
+```
+
+# Add tooltips
+Add tooltips via HTMLWidgets Javascript:
+[sankey diagram - How to not display values in the nodes or the links in SankeyDiagram using networkD3 in R - Stack Overflow](https://stackoverflow.com/questions/58786387/how-to-not-display-values-in-the-nodes-or-the-links-in-sankeydiagram-using-netwo)
+
+# Save As  
+
+## HTML  
+
+
+## PNG etc.
