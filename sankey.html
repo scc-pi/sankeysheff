@@ -3200,7 +3200,7 @@ div.tocify {
 
 <h1 class="title toc-ignore">Using Sankey diagrams</h1>
 <h4 class="author">BI Team, Sheffield City Council</h4>
-<h4 class="date">13 July, 2022</h4>
+<h4 class="date">15 July, 2022</h4>
 
 </div>
 
@@ -3230,29 +3230,61 @@ programme. To build on this success we need to better understand:</p>
 <li>JavaScript, and in particular the D3 library, for dynamic,
 interactive data visualisations in web browsers.</li>
 </ol>
-<div id="network-analysis" class="section level2" number="1.1">
-<h2><span class="header-section-number">1.1</span> Network analysis</h2>
-<p>“Vertices” and “edges” seem to be the common terms used in network
-analysis books. Probably not as intuitive as the terms “nodes” and
-“links” used in some R packages. “Points” and “lines” would probably not
-differentiate it enough from a regular x and y axis graph. “Junctions”
-and “roads” too metaphorical? The “amount of traffic”, “weight”, “size
-of flow”, “value”, “edge attribute”, all relate to how much is passing
-from one vertex to another.</p>
-<p><a href="https://www.jessesadler.com/post/network-analysis-with-r/">Introduction
-to Network Analysis with R</a></p>
-<p>Chapter on <a href="https://thomasdegraaff.nl/ResearchTools/network-analysis-with-r.html">Network
+<div id="resources" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Resources</h2>
+<p>The reading and examples around this subject were frustratingly
+piecemeal until we came across the new <a href="https://ona-book.org/">Handbook of Graphs and Networks in People
+Analytics</a> (2022, Keith McNulty). The Foreword, Introduction and
+Chapter 1 provide motivation and outline practical applications of
+graphs and networks. Chapters 2, 3, 4, and 11 are more technical and
+provide the basis for what we need for the CEH project.</p>
+<p>The example followed in the CEH project for Pass 1 (before we found
+the handbook) was <a href="https://r-graph-gallery.com/321-introduction-to-interactive-sankey-diagram-2.html">Most
+basic Sankey Diagram – the R Graph Gallery (r-graph-gallery.com)</a>.
+The <a href="https://bookdown.org/content/b298e479-b1ab-49fa-b83d-a57c2b034d49/flow.html#sankey-diagram">R
+Gallery Book</a> would have been better to work from.</p>
+<p>Other resources used or identified include:</p>
+<ul>
+<li><p><a href="https://www.jessesadler.com/post/network-analysis-with-r/">Introduction
+to Network Analysis with R</a> (2017, Jesse Sadler).</p></li>
+<li><p>Chapter on <a href="https://thomasdegraaff.nl/ResearchTools/network-analysis-with-r.html">Network
 analysis with R</a> from <a href="https://thomasdegraaff.nl/ResearchTools/index.html">Research Tools
-for Social Scientists</a>.</p>
-<p><a href="https://kateto.net/netscix2016.html">Network Analysis and
-Visualization with R and igraph</a></p>
-<p><a href="https://www.amazon.co.uk/dp/B077RHSB3Y/ref=dp-kindle-redirect?_encoding=UTF8&amp;btkr=1">Network
-Analysis and Visualization in R: Quick Start Guide</a></p>
-<p><a href="https://link.springer.com/book/10.1007/978-3-319-23883-8">A
-User’s Guide to Network Analysis in R</a></p>
+for Social Scientists</a> (2017, Thomas de Graaff).</p></li>
+<li><p><a href="https://kateto.net/netscix2016.html">Network Analysis
+and Visualization with R and igraph</a> (2016, Katherine
+Ognyanova).</p></li>
+<li><p><a href="https://kateto.net/network-visualization">Static and
+dynamic network visualization with R</a> (2021, Katherine
+Ognyanova).</p></li>
+<li><p><a href="https://www.amazon.co.uk/dp/B077RHSB3Y/ref=dp-kindle-redirect?_encoding=UTF8&amp;btkr=1">Network
+Analysis and Visualization in R: Quick Start Guide</a> (2017, Alboukadel
+Kassambara).</p></li>
+<li><p><a href="https://link.springer.com/book/10.1007/978-3-319-23883-8">A User’s
+Guide to Network Analysis in R</a> (2015, Douglas Luke).</p></li>
+</ul>
 </div>
-<div id="networkd3-package" class="section level2" number="1.2">
-<h2><span class="header-section-number">1.2</span> networkD3
+<div id="network-analysis" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Network analysis</h2>
+<p><em>Vertices</em> and <em>edges</em> seem to be the key terms used in
+network analysis books. Probably not as intuitive as the terms
+<em>nodes</em> and <em>links</em> used in some R packages.
+<em>Points</em> and <em>lines</em> would probably not differentiate it
+enough from a regular x and y axis graph. <em>Junctions</em> and
+<em>roads</em> too metaphorical? The <em>amount of traffic</em>,
+<em>weight</em>, <em>size of flow</em>, <em>value</em>, <em>edge
+attribute</em>, all relate to how much is passing from one vertex to
+another.</p>
+<p>In addition to other types of network visualisation, such as chord or
+weighted arc diagrams, network analysis is useful where connections
+rather than transactions are the priority.</p>
+<blockquote>
+<p>Graph databases store data so that finding relationships is the
+primary priority. This contrasts with traditional databases where
+finding transactions is the primary priority.</p>
+</blockquote>
+</div>
+<div id="networkd3-package" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> networkD3
 package</h2>
 <p>These notes are going to focus on using the <code>networkD3</code> R
 package: <a href="https://christophergandrud.github.io/networkD3/">christophergandrud.github.io/networkD3/</a>.</p>
@@ -3261,10 +3293,30 @@ package: <a href="https://christophergandrud.github.io/networkD3/">christopherga
 maintenance and examples. Plus, familiarity with the package could help
 us produce other types of network diagrams. Consideration of other
 packages was not especially thorough.</p>
-<p>The example followed initially in the CEH project was: <a href="https://r-graph-gallery.com/321-introduction-to-interactive-sankey-diagram-2.html">Most
-basic Sankey Diagram – the R Graph Gallery (r-graph-gallery.com)</a>.
-However, the <a href="https://bookdown.org/content/b298e479-b1ab-49fa-b83d-a57c2b034d49/flow.html#sankey-diagram">R
-Gallery Book</a> would have been better.</p>
+<blockquote>
+<p>The networkD3 package offers useful, convenient ways for
+non-Javascript programmers to make use of many of the great capabilities
+of the D3 visualisation library. However, the package’s customization
+potential is limited. For those who can program in D3, the scope exists
+to create amazing interactive graph visualisations, with limitless
+customization potential.</p>
+</blockquote>
+<p>We don’t need the Sankey to be dynamic and interactive for CEH.
+Certainly not initially for the high level group visualisations.
+However, Sankey’s quickly become unwieldy with too much information,
+which is where the interaction, the ability for the reader to explore
+the diagram, is useful. Additionaly, the D3 options for Sankey are
+simpler to use than to build a static alternative. In short, some
+JavaScript looks unavoidable. Reassuringly, Hadley Wickham tweeted
+recently that he expected JavaScript to be tied to the future of R
+visualisations, so it’s a good skill to invest in.</p>
+<p>James Ford has asked about the possibility of a <em>Sankey Pivot</em>
+- a Sankey where different aspects can be selected. Maybe something like
+this, <a href="https://observablehq.com/@d3/sankey">observablehq.com/<span class="citation">@d3/sankey</span></a>, but with, for example, being
+able to select of types of Early Help, rather than link colour.
+Including the Sankey in a <a href="https://scc-pi.github.io/pinsheff/rmd.html#flexdashboard">flexdashboard</a>
+might be the easiest way to accomplish this and avoid too much
+JavaScript.</p>
 </div>
 </div>
 <div id="sankey-example" class="section level1" number="2">
@@ -3320,13 +3372,13 @@ rm(ceh_groups, ceh_children, ceh_early_help)
 ceh_nodes %&gt;% 
   display_tbl() %&gt;% 
   fmt_number(columns = CHILDREN, decimals = 0, use_seps = TRUE)</code></pre>
-<div id="bpyuhgtpzc" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="fizoaaakpn" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 html {
   font-family: Chivo, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#bpyuhgtpzc .gt_table {
+#fizoaaakpn .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: 0;
@@ -3351,7 +3403,7 @@ html {
   border-left-color: #D3D3D3;
 }
 
-#bpyuhgtpzc .gt_heading {
+#fizoaaakpn .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -3363,7 +3415,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#bpyuhgtpzc .gt_title {
+#fizoaaakpn .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3375,7 +3427,7 @@ html {
   border-bottom-width: 0;
 }
 
-#bpyuhgtpzc .gt_subtitle {
+#fizoaaakpn .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3387,13 +3439,13 @@ html {
   border-top-width: 0;
 }
 
-#bpyuhgtpzc .gt_bottom_border {
+#fizoaaakpn .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#bpyuhgtpzc .gt_col_headings {
+#fizoaaakpn .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3408,7 +3460,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#bpyuhgtpzc .gt_col_heading {
+#fizoaaakpn .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -3428,7 +3480,7 @@ html {
   overflow-x: hidden;
 }
 
-#bpyuhgtpzc .gt_column_spanner_outer {
+#fizoaaakpn .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -3440,15 +3492,15 @@ html {
   padding-right: 4px;
 }
 
-#bpyuhgtpzc .gt_column_spanner_outer:first-child {
+#fizoaaakpn .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#bpyuhgtpzc .gt_column_spanner_outer:last-child {
+#fizoaaakpn .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#bpyuhgtpzc .gt_column_spanner {
+#fizoaaakpn .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #000000;
@@ -3460,7 +3512,7 @@ html {
   width: 100%;
 }
 
-#bpyuhgtpzc .gt_group_heading {
+#fizoaaakpn .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3485,7 +3537,7 @@ html {
   vertical-align: middle;
 }
 
-#bpyuhgtpzc .gt_empty_group_heading {
+#fizoaaakpn .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3500,15 +3552,15 @@ html {
   vertical-align: middle;
 }
 
-#bpyuhgtpzc .gt_from_md > :first-child {
+#fizoaaakpn .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#bpyuhgtpzc .gt_from_md > :last-child {
+#fizoaaakpn .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#bpyuhgtpzc .gt_row {
+#fizoaaakpn .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -3527,7 +3579,7 @@ html {
   overflow-x: hidden;
 }
 
-#bpyuhgtpzc .gt_stub {
+#fizoaaakpn .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -3540,7 +3592,7 @@ html {
   padding-right: 5px;
 }
 
-#bpyuhgtpzc .gt_stub_row_group {
+#fizoaaakpn .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -3554,11 +3606,11 @@ html {
   vertical-align: top;
 }
 
-#bpyuhgtpzc .gt_row_group_first td {
+#fizoaaakpn .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#bpyuhgtpzc .gt_summary_row {
+#fizoaaakpn .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3568,16 +3620,16 @@ html {
   padding-right: 5px;
 }
 
-#bpyuhgtpzc .gt_first_summary_row {
+#fizoaaakpn .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#bpyuhgtpzc .gt_first_summary_row.thick {
+#fizoaaakpn .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#bpyuhgtpzc .gt_last_summary_row {
+#fizoaaakpn .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3587,7 +3639,7 @@ html {
   border-bottom-color: #D3D3D3;
 }
 
-#bpyuhgtpzc .gt_grand_summary_row {
+#fizoaaakpn .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -3597,7 +3649,7 @@ html {
   padding-right: 5px;
 }
 
-#bpyuhgtpzc .gt_first_grand_summary_row {
+#fizoaaakpn .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3607,11 +3659,11 @@ html {
   border-top-color: #D3D3D3;
 }
 
-#bpyuhgtpzc .gt_striped {
+#fizoaaakpn .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#bpyuhgtpzc .gt_table_body {
+#fizoaaakpn .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3620,7 +3672,7 @@ html {
   border-bottom-color: #D3D3D3;
 }
 
-#bpyuhgtpzc .gt_footnotes {
+#fizoaaakpn .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3634,7 +3686,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#bpyuhgtpzc .gt_footnote {
+#fizoaaakpn .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -3643,7 +3695,7 @@ html {
   padding-right: 5px;
 }
 
-#bpyuhgtpzc .gt_sourcenotes {
+#fizoaaakpn .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -3657,7 +3709,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#bpyuhgtpzc .gt_sourcenote {
+#fizoaaakpn .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -3665,36 +3717,36 @@ html {
   padding-right: 5px;
 }
 
-#bpyuhgtpzc .gt_left {
+#fizoaaakpn .gt_left {
   text-align: left;
 }
 
-#bpyuhgtpzc .gt_center {
+#fizoaaakpn .gt_center {
   text-align: center;
 }
 
-#bpyuhgtpzc .gt_right {
+#fizoaaakpn .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#bpyuhgtpzc .gt_font_normal {
+#fizoaaakpn .gt_font_normal {
   font-weight: normal;
 }
 
-#bpyuhgtpzc .gt_font_bold {
+#fizoaaakpn .gt_font_bold {
   font-weight: bold;
 }
 
-#bpyuhgtpzc .gt_font_italic {
+#fizoaaakpn .gt_font_italic {
   font-style: italic;
 }
 
-#bpyuhgtpzc .gt_super {
+#fizoaaakpn .gt_super {
   font-size: 65%;
 }
 
-#bpyuhgtpzc .gt_two_val_uncert {
+#fizoaaakpn .gt_two_val_uncert {
   display: inline-block;
   line-height: 1em;
   text-align: right;
@@ -3703,31 +3755,31 @@ html {
   margin-left: 0.1em;
 }
 
-#bpyuhgtpzc .gt_footnote_marks {
+#fizoaaakpn .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#bpyuhgtpzc .gt_asterisk {
+#fizoaaakpn .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#bpyuhgtpzc .gt_slash_mark {
+#fizoaaakpn .gt_slash_mark {
   font-size: 0.7em;
   line-height: 0.7em;
   vertical-align: 0.15em;
 }
 
-#bpyuhgtpzc .gt_fraction_numerator {
+#fizoaaakpn .gt_fraction_numerator {
   font-size: 0.6em;
   line-height: 0.6em;
   vertical-align: 0.45em;
 }
 
-#bpyuhgtpzc .gt_fraction_denominator {
+#fizoaaakpn .gt_fraction_denominator {
   font-size: 0.6em;
   line-height: 0.6em;
   vertical-align: -0.05em;
@@ -3779,13 +3831,13 @@ ceh_connections &lt;- tribble(
 ceh_connections %&gt;% 
   display_tbl() %&gt;% 
   fmt_number(columns = CHILDREN, decimals = 0, use_seps = TRUE)</code></pre>
-<div id="sqfjxgmfon" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="ngajnraidv" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 html {
   font-family: Chivo, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#sqfjxgmfon .gt_table {
+#ngajnraidv .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: 0;
@@ -3810,7 +3862,7 @@ html {
   border-left-color: #D3D3D3;
 }
 
-#sqfjxgmfon .gt_heading {
+#ngajnraidv .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -3822,7 +3874,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#sqfjxgmfon .gt_title {
+#ngajnraidv .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -3834,7 +3886,7 @@ html {
   border-bottom-width: 0;
 }
 
-#sqfjxgmfon .gt_subtitle {
+#ngajnraidv .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -3846,13 +3898,13 @@ html {
   border-top-width: 0;
 }
 
-#sqfjxgmfon .gt_bottom_border {
+#ngajnraidv .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#sqfjxgmfon .gt_col_headings {
+#ngajnraidv .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -3867,7 +3919,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#sqfjxgmfon .gt_col_heading {
+#ngajnraidv .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -3887,7 +3939,7 @@ html {
   overflow-x: hidden;
 }
 
-#sqfjxgmfon .gt_column_spanner_outer {
+#ngajnraidv .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -3899,15 +3951,15 @@ html {
   padding-right: 4px;
 }
 
-#sqfjxgmfon .gt_column_spanner_outer:first-child {
+#ngajnraidv .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#sqfjxgmfon .gt_column_spanner_outer:last-child {
+#ngajnraidv .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#sqfjxgmfon .gt_column_spanner {
+#ngajnraidv .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #000000;
@@ -3919,7 +3971,7 @@ html {
   width: 100%;
 }
 
-#sqfjxgmfon .gt_group_heading {
+#ngajnraidv .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -3944,7 +3996,7 @@ html {
   vertical-align: middle;
 }
 
-#sqfjxgmfon .gt_empty_group_heading {
+#ngajnraidv .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -3959,15 +4011,15 @@ html {
   vertical-align: middle;
 }
 
-#sqfjxgmfon .gt_from_md > :first-child {
+#ngajnraidv .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#sqfjxgmfon .gt_from_md > :last-child {
+#ngajnraidv .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#sqfjxgmfon .gt_row {
+#ngajnraidv .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -3986,7 +4038,7 @@ html {
   overflow-x: hidden;
 }
 
-#sqfjxgmfon .gt_stub {
+#ngajnraidv .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -3999,7 +4051,7 @@ html {
   padding-right: 5px;
 }
 
-#sqfjxgmfon .gt_stub_row_group {
+#ngajnraidv .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4013,11 +4065,11 @@ html {
   vertical-align: top;
 }
 
-#sqfjxgmfon .gt_row_group_first td {
+#ngajnraidv .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#sqfjxgmfon .gt_summary_row {
+#ngajnraidv .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4027,16 +4079,16 @@ html {
   padding-right: 5px;
 }
 
-#sqfjxgmfon .gt_first_summary_row {
+#ngajnraidv .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#sqfjxgmfon .gt_first_summary_row.thick {
+#ngajnraidv .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#sqfjxgmfon .gt_last_summary_row {
+#ngajnraidv .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4046,7 +4098,7 @@ html {
   border-bottom-color: #D3D3D3;
 }
 
-#sqfjxgmfon .gt_grand_summary_row {
+#ngajnraidv .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4056,7 +4108,7 @@ html {
   padding-right: 5px;
 }
 
-#sqfjxgmfon .gt_first_grand_summary_row {
+#ngajnraidv .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4066,11 +4118,11 @@ html {
   border-top-color: #D3D3D3;
 }
 
-#sqfjxgmfon .gt_striped {
+#ngajnraidv .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#sqfjxgmfon .gt_table_body {
+#ngajnraidv .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4079,7 +4131,7 @@ html {
   border-bottom-color: #D3D3D3;
 }
 
-#sqfjxgmfon .gt_footnotes {
+#ngajnraidv .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4093,7 +4145,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#sqfjxgmfon .gt_footnote {
+#ngajnraidv .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -4102,7 +4154,7 @@ html {
   padding-right: 5px;
 }
 
-#sqfjxgmfon .gt_sourcenotes {
+#ngajnraidv .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4116,7 +4168,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#sqfjxgmfon .gt_sourcenote {
+#ngajnraidv .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -4124,36 +4176,36 @@ html {
   padding-right: 5px;
 }
 
-#sqfjxgmfon .gt_left {
+#ngajnraidv .gt_left {
   text-align: left;
 }
 
-#sqfjxgmfon .gt_center {
+#ngajnraidv .gt_center {
   text-align: center;
 }
 
-#sqfjxgmfon .gt_right {
+#ngajnraidv .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#sqfjxgmfon .gt_font_normal {
+#ngajnraidv .gt_font_normal {
   font-weight: normal;
 }
 
-#sqfjxgmfon .gt_font_bold {
+#ngajnraidv .gt_font_bold {
   font-weight: bold;
 }
 
-#sqfjxgmfon .gt_font_italic {
+#ngajnraidv .gt_font_italic {
   font-style: italic;
 }
 
-#sqfjxgmfon .gt_super {
+#ngajnraidv .gt_super {
   font-size: 65%;
 }
 
-#sqfjxgmfon .gt_two_val_uncert {
+#ngajnraidv .gt_two_val_uncert {
   display: inline-block;
   line-height: 1em;
   text-align: right;
@@ -4162,31 +4214,31 @@ html {
   margin-left: 0.1em;
 }
 
-#sqfjxgmfon .gt_footnote_marks {
+#ngajnraidv .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#sqfjxgmfon .gt_asterisk {
+#ngajnraidv .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#sqfjxgmfon .gt_slash_mark {
+#ngajnraidv .gt_slash_mark {
   font-size: 0.7em;
   line-height: 0.7em;
   vertical-align: 0.15em;
 }
 
-#sqfjxgmfon .gt_fraction_numerator {
+#ngajnraidv .gt_fraction_numerator {
   font-size: 0.6em;
   line-height: 0.6em;
   vertical-align: 0.45em;
 }
 
-#sqfjxgmfon .gt_fraction_denominator {
+#ngajnraidv .gt_fraction_denominator {
   font-size: 0.6em;
   line-height: 0.6em;
   vertical-align: -0.05em;
@@ -4240,20 +4292,20 @@ ceh_graph &lt;- graph_from_data_frame(
 )
 
 # Convert to object suitable for networkD3
-# One data frame of &#39;links&#39; and another of &#39;nodes&#39; returned in a list.
+# One data frame of &#39;links&#39; and another of &#39;nodes&#39; returned in a list
 ceh_d3 &lt;- igraph_to_networkD3(ceh_graph, what = &quot;both&quot;)
 
 # Display links table
 ceh_d3$links %&gt;% 
   display_tbl %&gt;% 
   fmt_number(columns = value, decimals = 0, use_seps = TRUE)</code></pre>
-<div id="glrrhnuuij" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="wqakcembwl" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 html {
   font-family: Chivo, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#glrrhnuuij .gt_table {
+#wqakcembwl .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: 0;
@@ -4278,7 +4330,7 @@ html {
   border-left-color: #D3D3D3;
 }
 
-#glrrhnuuij .gt_heading {
+#wqakcembwl .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -4290,7 +4342,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#glrrhnuuij .gt_title {
+#wqakcembwl .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -4302,7 +4354,7 @@ html {
   border-bottom-width: 0;
 }
 
-#glrrhnuuij .gt_subtitle {
+#wqakcembwl .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -4314,13 +4366,13 @@ html {
   border-top-width: 0;
 }
 
-#glrrhnuuij .gt_bottom_border {
+#wqakcembwl .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#glrrhnuuij .gt_col_headings {
+#wqakcembwl .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4335,7 +4387,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#glrrhnuuij .gt_col_heading {
+#wqakcembwl .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -4355,7 +4407,7 @@ html {
   overflow-x: hidden;
 }
 
-#glrrhnuuij .gt_column_spanner_outer {
+#wqakcembwl .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -4367,15 +4419,15 @@ html {
   padding-right: 4px;
 }
 
-#glrrhnuuij .gt_column_spanner_outer:first-child {
+#wqakcembwl .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#glrrhnuuij .gt_column_spanner_outer:last-child {
+#wqakcembwl .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#glrrhnuuij .gt_column_spanner {
+#wqakcembwl .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #000000;
@@ -4387,7 +4439,7 @@ html {
   width: 100%;
 }
 
-#glrrhnuuij .gt_group_heading {
+#wqakcembwl .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4412,7 +4464,7 @@ html {
   vertical-align: middle;
 }
 
-#glrrhnuuij .gt_empty_group_heading {
+#wqakcembwl .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -4427,15 +4479,15 @@ html {
   vertical-align: middle;
 }
 
-#glrrhnuuij .gt_from_md > :first-child {
+#wqakcembwl .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#glrrhnuuij .gt_from_md > :last-child {
+#wqakcembwl .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#glrrhnuuij .gt_row {
+#wqakcembwl .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -4454,7 +4506,7 @@ html {
   overflow-x: hidden;
 }
 
-#glrrhnuuij .gt_stub {
+#wqakcembwl .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -4467,7 +4519,7 @@ html {
   padding-right: 5px;
 }
 
-#glrrhnuuij .gt_stub_row_group {
+#wqakcembwl .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4481,11 +4533,11 @@ html {
   vertical-align: top;
 }
 
-#glrrhnuuij .gt_row_group_first td {
+#wqakcembwl .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#glrrhnuuij .gt_summary_row {
+#wqakcembwl .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4495,16 +4547,16 @@ html {
   padding-right: 5px;
 }
 
-#glrrhnuuij .gt_first_summary_row {
+#wqakcembwl .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#glrrhnuuij .gt_first_summary_row.thick {
+#wqakcembwl .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#glrrhnuuij .gt_last_summary_row {
+#wqakcembwl .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4514,7 +4566,7 @@ html {
   border-bottom-color: #D3D3D3;
 }
 
-#glrrhnuuij .gt_grand_summary_row {
+#wqakcembwl .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4524,7 +4576,7 @@ html {
   padding-right: 5px;
 }
 
-#glrrhnuuij .gt_first_grand_summary_row {
+#wqakcembwl .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4534,11 +4586,11 @@ html {
   border-top-color: #D3D3D3;
 }
 
-#glrrhnuuij .gt_striped {
+#wqakcembwl .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#glrrhnuuij .gt_table_body {
+#wqakcembwl .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4547,7 +4599,7 @@ html {
   border-bottom-color: #D3D3D3;
 }
 
-#glrrhnuuij .gt_footnotes {
+#wqakcembwl .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4561,7 +4613,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#glrrhnuuij .gt_footnote {
+#wqakcembwl .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -4570,7 +4622,7 @@ html {
   padding-right: 5px;
 }
 
-#glrrhnuuij .gt_sourcenotes {
+#wqakcembwl .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -4584,7 +4636,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#glrrhnuuij .gt_sourcenote {
+#wqakcembwl .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -4592,36 +4644,36 @@ html {
   padding-right: 5px;
 }
 
-#glrrhnuuij .gt_left {
+#wqakcembwl .gt_left {
   text-align: left;
 }
 
-#glrrhnuuij .gt_center {
+#wqakcembwl .gt_center {
   text-align: center;
 }
 
-#glrrhnuuij .gt_right {
+#wqakcembwl .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#glrrhnuuij .gt_font_normal {
+#wqakcembwl .gt_font_normal {
   font-weight: normal;
 }
 
-#glrrhnuuij .gt_font_bold {
+#wqakcembwl .gt_font_bold {
   font-weight: bold;
 }
 
-#glrrhnuuij .gt_font_italic {
+#wqakcembwl .gt_font_italic {
   font-style: italic;
 }
 
-#glrrhnuuij .gt_super {
+#wqakcembwl .gt_super {
   font-size: 65%;
 }
 
-#glrrhnuuij .gt_two_val_uncert {
+#wqakcembwl .gt_two_val_uncert {
   display: inline-block;
   line-height: 1em;
   text-align: right;
@@ -4630,31 +4682,31 @@ html {
   margin-left: 0.1em;
 }
 
-#glrrhnuuij .gt_footnote_marks {
+#wqakcembwl .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#glrrhnuuij .gt_asterisk {
+#wqakcembwl .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#glrrhnuuij .gt_slash_mark {
+#wqakcembwl .gt_slash_mark {
   font-size: 0.7em;
   line-height: 0.7em;
   vertical-align: 0.15em;
 }
 
-#glrrhnuuij .gt_fraction_numerator {
+#wqakcembwl .gt_fraction_numerator {
   font-size: 0.6em;
   line-height: 0.6em;
   vertical-align: 0.45em;
 }
 
-#glrrhnuuij .gt_fraction_denominator {
+#wqakcembwl .gt_fraction_denominator {
   font-size: 0.6em;
   line-height: 0.6em;
   vertical-align: -0.05em;
@@ -4694,13 +4746,13 @@ tbody tr:last-child {
 <pre class="r"><code># Display nodes table
 ceh_d3$nodes %&gt;% 
   display_tbl()</code></pre>
-<div id="qjlvkkdvxt" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="odfdefqhmu" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 html {
   font-family: Chivo, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#qjlvkkdvxt .gt_table {
+#odfdefqhmu .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: 0;
@@ -4725,7 +4777,7 @@ html {
   border-left-color: #D3D3D3;
 }
 
-#qjlvkkdvxt .gt_heading {
+#odfdefqhmu .gt_heading {
   background-color: #FFFFFF;
   text-align: left;
   border-bottom-color: #FFFFFF;
@@ -4737,7 +4789,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#qjlvkkdvxt .gt_title {
+#odfdefqhmu .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -4749,7 +4801,7 @@ html {
   border-bottom-width: 0;
 }
 
-#qjlvkkdvxt .gt_subtitle {
+#odfdefqhmu .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -4761,13 +4813,13 @@ html {
   border-top-width: 0;
 }
 
-#qjlvkkdvxt .gt_bottom_border {
+#odfdefqhmu .gt_bottom_border {
   border-bottom-style: none;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#qjlvkkdvxt .gt_col_headings {
+#odfdefqhmu .gt_col_headings {
   border-top-style: none;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4782,7 +4834,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#qjlvkkdvxt .gt_col_heading {
+#odfdefqhmu .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -4802,7 +4854,7 @@ html {
   overflow-x: hidden;
 }
 
-#qjlvkkdvxt .gt_column_spanner_outer {
+#odfdefqhmu .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -4814,15 +4866,15 @@ html {
   padding-right: 4px;
 }
 
-#qjlvkkdvxt .gt_column_spanner_outer:first-child {
+#odfdefqhmu .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#qjlvkkdvxt .gt_column_spanner_outer:last-child {
+#odfdefqhmu .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#qjlvkkdvxt .gt_column_spanner {
+#odfdefqhmu .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #000000;
@@ -4834,7 +4886,7 @@ html {
   width: 100%;
 }
 
-#qjlvkkdvxt .gt_group_heading {
+#odfdefqhmu .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4859,7 +4911,7 @@ html {
   vertical-align: middle;
 }
 
-#qjlvkkdvxt .gt_empty_group_heading {
+#odfdefqhmu .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -4874,15 +4926,15 @@ html {
   vertical-align: middle;
 }
 
-#qjlvkkdvxt .gt_from_md > :first-child {
+#odfdefqhmu .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#qjlvkkdvxt .gt_from_md > :last-child {
+#odfdefqhmu .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#qjlvkkdvxt .gt_row {
+#odfdefqhmu .gt_row {
   padding-top: 3px;
   padding-bottom: 3px;
   padding-left: 5px;
@@ -4901,7 +4953,7 @@ html {
   overflow-x: hidden;
 }
 
-#qjlvkkdvxt .gt_stub {
+#odfdefqhmu .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 80%;
@@ -4914,7 +4966,7 @@ html {
   padding-right: 5px;
 }
 
-#qjlvkkdvxt .gt_stub_row_group {
+#odfdefqhmu .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -4928,11 +4980,11 @@ html {
   vertical-align: top;
 }
 
-#qjlvkkdvxt .gt_row_group_first td {
+#odfdefqhmu .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#qjlvkkdvxt .gt_summary_row {
+#odfdefqhmu .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4942,16 +4994,16 @@ html {
   padding-right: 5px;
 }
 
-#qjlvkkdvxt .gt_first_summary_row {
+#odfdefqhmu .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#qjlvkkdvxt .gt_first_summary_row.thick {
+#odfdefqhmu .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#qjlvkkdvxt .gt_last_summary_row {
+#odfdefqhmu .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4961,7 +5013,7 @@ html {
   border-bottom-color: #D3D3D3;
 }
 
-#qjlvkkdvxt .gt_grand_summary_row {
+#odfdefqhmu .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -4971,7 +5023,7 @@ html {
   padding-right: 5px;
 }
 
-#qjlvkkdvxt .gt_first_grand_summary_row {
+#odfdefqhmu .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -4981,11 +5033,11 @@ html {
   border-top-color: #D3D3D3;
 }
 
-#qjlvkkdvxt .gt_striped {
+#odfdefqhmu .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#qjlvkkdvxt .gt_table_body {
+#odfdefqhmu .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -4994,7 +5046,7 @@ html {
   border-bottom-color: #D3D3D3;
 }
 
-#qjlvkkdvxt .gt_footnotes {
+#odfdefqhmu .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5008,7 +5060,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#qjlvkkdvxt .gt_footnote {
+#odfdefqhmu .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -5017,7 +5069,7 @@ html {
   padding-right: 5px;
 }
 
-#qjlvkkdvxt .gt_sourcenotes {
+#odfdefqhmu .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -5031,7 +5083,7 @@ html {
   border-right-color: #D3D3D3;
 }
 
-#qjlvkkdvxt .gt_sourcenote {
+#odfdefqhmu .gt_sourcenote {
   font-size: 12px;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -5039,36 +5091,36 @@ html {
   padding-right: 5px;
 }
 
-#qjlvkkdvxt .gt_left {
+#odfdefqhmu .gt_left {
   text-align: left;
 }
 
-#qjlvkkdvxt .gt_center {
+#odfdefqhmu .gt_center {
   text-align: center;
 }
 
-#qjlvkkdvxt .gt_right {
+#odfdefqhmu .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#qjlvkkdvxt .gt_font_normal {
+#odfdefqhmu .gt_font_normal {
   font-weight: normal;
 }
 
-#qjlvkkdvxt .gt_font_bold {
+#odfdefqhmu .gt_font_bold {
   font-weight: bold;
 }
 
-#qjlvkkdvxt .gt_font_italic {
+#odfdefqhmu .gt_font_italic {
   font-style: italic;
 }
 
-#qjlvkkdvxt .gt_super {
+#odfdefqhmu .gt_super {
   font-size: 65%;
 }
 
-#qjlvkkdvxt .gt_two_val_uncert {
+#odfdefqhmu .gt_two_val_uncert {
   display: inline-block;
   line-height: 1em;
   text-align: right;
@@ -5077,31 +5129,517 @@ html {
   margin-left: 0.1em;
 }
 
-#qjlvkkdvxt .gt_footnote_marks {
+#odfdefqhmu .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#qjlvkkdvxt .gt_asterisk {
+#odfdefqhmu .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#qjlvkkdvxt .gt_slash_mark {
+#odfdefqhmu .gt_slash_mark {
   font-size: 0.7em;
   line-height: 0.7em;
   vertical-align: 0.15em;
 }
 
-#qjlvkkdvxt .gt_fraction_numerator {
+#odfdefqhmu .gt_fraction_numerator {
   font-size: 0.6em;
   line-height: 0.6em;
   vertical-align: 0.45em;
 }
 
-#qjlvkkdvxt .gt_fraction_denominator {
+#odfdefqhmu .gt_fraction_denominator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: -0.05em;
+}
+
+tbody tr:last-child {
+  border-bottom: 2px solid #ffffff00;
+}
+</style>
+<table class="gt_table">
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" style="border-top-width: 0px; border-top-style: solid; border-top-color: black;">name</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_left">Children</td></tr>
+    <tr><td class="gt_row gt_left">Early Help</td></tr>
+    <tr><td class="gt_row gt_left">1 SC</td></tr>
+    <tr><td class="gt_row gt_left">2 EH SC</td></tr>
+    <tr><td class="gt_row gt_left">3 EH</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+<pre class="r"><code># Display D3 Sankey diagram
+sankeyNetwork(
+  Links = ceh_d3$links, 
+  Nodes = ceh_d3$nodes,
+  Source = &quot;source&quot;, 
+  Target = &quot;target&quot;, 
+  Value = &quot;value&quot;,
+  NodeID = &quot;name&quot;,
+  nodeWidth = 40,
+  fontSize = 13,
+  nodePadding = 20,
+  units = &quot;children&quot;
+)</code></pre>
+<div id="htmlwidget-cfb62207caca6ace7348" style="width:672px;height:480px;" class="sankeyNetwork html-widget"></div>
+<script type="application/json" data-for="htmlwidget-cfb62207caca6ace7348">{"x":{"links":{"source":[0,1,1,0],"target":[2,3,4,1],"value":[4000,4000,22000,26000]},"nodes":{"name":["Children","Early Help","1 SC","2 EH SC","3 EH"],"group":["Children","Early Help","1 SC","2 EH SC","3 EH"]},"options":{"NodeID":"name","NodeGroup":"name","LinkGroup":null,"colourScale":"d3.scaleOrdinal(d3.schemeCategory20);","fontSize":13,"fontFamily":null,"nodeWidth":40,"nodePadding":20,"units":"children","margin":{"top":null,"right":null,"bottom":null,"left":null},"iterations":32,"sinksRight":true}},"evals":[],"jsHooks":[]}</script>
+</div>
+</div>
+<div id="colours" class="section level1" number="3">
+<h1><span class="header-section-number">3</span> Colours</h1>
+<p><a href="https://stackoverflow.com/questions/31992685/colour-specific-node-in-igraph">Colour
+specific node in igraph</a></p>
+</div>
+<div id="node-attributes" class="section level1" number="4">
+<h1><span class="header-section-number">4</span> Node attributes</h1>
+<p>Need to use groups, memberships, communities etc.</p>
+<pre class="r"><code>ceh_d3$nodes$vertex.color &lt;- &quot;blue&quot;
+#V(mp_graph)$colour
+
+# ceh_nodes &lt;- mutate(ceh_nodes, clr = &quot;red&quot;)
+# 
+# ceh_graph &lt;- graph_from_data_frame(
+#   ceh_connections, 
+#   vertices = ceh_nodes, #data frame with vertex metadata
+#   directed = TRUE
+# )
+# 
+# ceh_graph &lt;- set_vertex_attr(ceh_graph, name = &quot;clr&quot;, value = &quot;blue&quot;)
+
+
+# Convert to object suitable for networkD3
+# One data frame of &#39;links&#39; and another of &#39;nodes&#39; returned in a list
+ceh_d3 &lt;- igraph_to_networkD3(ceh_graph, what = &quot;both&quot;)
+
+# # Display links table
+# ceh_d3$links %&gt;% 
+#   display_tbl %&gt;% 
+#   fmt_number(columns = value, decimals = 0, use_seps = TRUE)
+
+# Display nodes table
+ceh_d3$nodes %&gt;% 
+  display_tbl()</code></pre>
+<div id="pwchkkkoti" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>@import url("https://fonts.googleapis.com/css2?family=Chivo:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+html {
+  font-family: Chivo, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#pwchkkkoti .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: 0;
+  margin-right: auto;
+  color: #333333;
+  font-size: 12px;
+  font-weight: 300;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: none;
+  border-top-width: 3px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#pwchkkkoti .gt_heading {
+  background-color: #FFFFFF;
+  text-align: left;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#pwchkkkoti .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#pwchkkkoti .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#pwchkkkoti .gt_bottom_border {
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pwchkkkoti .gt_col_headings {
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #000000;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#pwchkkkoti .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: normal;
+  text-transform: uppercase;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#pwchkkkoti .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: normal;
+  text-transform: uppercase;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#pwchkkkoti .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#pwchkkkoti .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#pwchkkkoti .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #000000;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#pwchkkkoti .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #000000;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#pwchkkkoti .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  border-top-style: none;
+  border-top-width: 2px;
+  border-top-color: #000000;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #FFFFFF;
+  vertical-align: middle;
+}
+
+#pwchkkkoti .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#pwchkkkoti .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#pwchkkkoti .gt_row {
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#pwchkkkoti .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 80%;
+  font-weight: bolder;
+  text-transform: uppercase;
+  border-right-style: solid;
+  border-right-width: 0px;
+  border-right-color: #FFFFFF;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pwchkkkoti .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#pwchkkkoti .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#pwchkkkoti .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pwchkkkoti .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#pwchkkkoti .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#pwchkkkoti .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pwchkkkoti .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pwchkkkoti .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#pwchkkkoti .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#pwchkkkoti .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#pwchkkkoti .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#pwchkkkoti .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pwchkkkoti .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#pwchkkkoti .gt_sourcenote {
+  font-size: 12px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#pwchkkkoti .gt_left {
+  text-align: left;
+}
+
+#pwchkkkoti .gt_center {
+  text-align: center;
+}
+
+#pwchkkkoti .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#pwchkkkoti .gt_font_normal {
+  font-weight: normal;
+}
+
+#pwchkkkoti .gt_font_bold {
+  font-weight: bold;
+}
+
+#pwchkkkoti .gt_font_italic {
+  font-style: italic;
+}
+
+#pwchkkkoti .gt_super {
+  font-size: 65%;
+}
+
+#pwchkkkoti .gt_two_val_uncert {
+  display: inline-block;
+  line-height: 1em;
+  text-align: right;
+  font-size: 60%;
+  vertical-align: -0.25em;
+  margin-left: 0.1em;
+}
+
+#pwchkkkoti .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#pwchkkkoti .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#pwchkkkoti .gt_slash_mark {
+  font-size: 0.7em;
+  line-height: 0.7em;
+  vertical-align: 0.15em;
+}
+
+#pwchkkkoti .gt_fraction_numerator {
+  font-size: 0.6em;
+  line-height: 0.6em;
+  vertical-align: 0.45em;
+}
+
+#pwchkkkoti .gt_fraction_denominator {
   font-size: 0.6em;
   line-height: 0.6em;
   vertical-align: -0.05em;
@@ -5141,29 +5679,25 @@ sankeyNetwork(
   fontSize = 13,
   nodePadding = 20
 )</code></pre>
-<div id="htmlwidget-13df2428dedc0c5b11dd" style="width:672px;height:480px;" class="sankeyNetwork html-widget"></div>
-<script type="application/json" data-for="htmlwidget-13df2428dedc0c5b11dd">{"x":{"links":{"source":[0,1,1,0],"target":[2,3,4,1],"value":[4000,4000,22000,26000]},"nodes":{"name":["Children","Early Help","1 SC","2 EH SC","3 EH"],"group":["Children","Early Help","1 SC","2 EH SC","3 EH"]},"options":{"NodeID":"name","NodeGroup":"name","LinkGroup":null,"colourScale":"d3.scaleOrdinal(d3.schemeCategory20);","fontSize":13,"fontFamily":null,"nodeWidth":40,"nodePadding":20,"units":"","margin":{"top":null,"right":null,"bottom":null,"left":null},"iterations":32,"sinksRight":true}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-a739534b052cc12de4f3" style="width:672px;height:480px;" class="sankeyNetwork html-widget"></div>
+<script type="application/json" data-for="htmlwidget-a739534b052cc12de4f3">{"x":{"links":{"source":[0,1,1,0],"target":[2,3,4,1],"value":[4000,4000,22000,26000]},"nodes":{"name":["Children","Early Help","1 SC","2 EH SC","3 EH"],"group":["Children","Early Help","1 SC","2 EH SC","3 EH"]},"options":{"NodeID":"name","NodeGroup":"name","LinkGroup":null,"colourScale":"d3.scaleOrdinal(d3.schemeCategory20);","fontSize":13,"fontFamily":null,"nodeWidth":40,"nodePadding":20,"units":"","margin":{"top":null,"right":null,"bottom":null,"left":null},"iterations":32,"sinksRight":true}},"evals":[],"jsHooks":[]}</script>
 </div>
-</div>
-<div id="colours" class="section level1" number="3">
-<h1><span class="header-section-number">3</span> Colours</h1>
-</div>
-<div id="add-tooltips" class="section level1" number="4">
-<h1><span class="header-section-number">4</span> Add tooltips</h1>
+<div id="add-tooltips" class="section level1" number="5">
+<h1><span class="header-section-number">5</span> Add tooltips</h1>
 <p>Add tooltips via HTMLWidgets JavaScript: <a href="https://stackoverflow.com/questions/58786387/how-to-not-display-values-in-the-nodes-or-the-links-in-sankeydiagram-using-netwo">sankey
 diagram - How to not display values in the nodes or the links in
 SankeyDiagram using networkD3 in R - Stack Overflow</a></p>
 </div>
-<div id="dummy-nodes" class="section level1" number="5">
-<h1><span class="header-section-number">5</span> Dummy nodes</h1>
+<div id="dummy-nodes" class="section level1" number="6">
+<h1><span class="header-section-number">6</span> Dummy nodes</h1>
 </div>
-<div id="save-as" class="section level1" number="6">
-<h1><span class="header-section-number">6</span> Save As</h1>
-<div id="html" class="section level2" number="6.1">
-<h2><span class="header-section-number">6.1</span> HTML</h2>
+<div id="save-as" class="section level1" number="7">
+<h1><span class="header-section-number">7</span> Save As</h1>
+<div id="html" class="section level2" number="7.1">
+<h2><span class="header-section-number">7.1</span> HTML</h2>
 </div>
-<div id="png-etc." class="section level2" number="6.2">
-<h2><span class="header-section-number">6.2</span> PNG etc.</h2>
+<div id="png-etc." class="section level2" number="7.2">
+<h2><span class="header-section-number">7.2</span> PNG etc.</h2>
 </div>
 </div>
 

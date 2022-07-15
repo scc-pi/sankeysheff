@@ -53,19 +53,34 @@ We have had some initial success producing Sankey diagrams for Pass 1 of the Chi
 1. Network analysis, of which Sankeys are a part.  
 1. JavaScript, and in particular the D3 library, for dynamic, interactive data visualisations in web browsers.  
 
+## Resources  
+
+The reading and examples around this subject were frustratingly piecemeal until we came across the new [Handbook of Graphs and Networks in People Analytics](https://ona-book.org/) (2022, Keith McNulty). The Foreword,  Introduction and Chapter 1 provide motivation and outline practical applications of graphs and networks. Chapters 2, 3, 4, and 11 are more technical and provide the basis for what we need for the CEH project. 
+
+The example followed in the CEH project for Pass 1 (before we found the handbook) was [Most basic Sankey Diagram – the R Graph Gallery (r-graph-gallery.com)](https://r-graph-gallery.com/321-introduction-to-interactive-sankey-diagram-2.html). The [R Gallery Book](https://bookdown.org/content/b298e479-b1ab-49fa-b83d-a57c2b034d49/flow.html#sankey-diagram) would have been better to work from.
+
+Other resources used or identified include:  
+
+* [Introduction to Network Analysis with R](https://www.jessesadler.com/post/network-analysis-with-r/) (2017, Jesse Sadler).  
+
+* Chapter on [Network analysis with R](https://thomasdegraaff.nl/ResearchTools/network-analysis-with-r.html) from [Research Tools for Social Scientists](https://thomasdegraaff.nl/ResearchTools/index.html) (2017, Thomas de Graaff).  
+
+* [Network Analysis and Visualization with R and igraph](https://kateto.net/netscix2016.html) (2016, Katherine Ognyanova). 
+
+* [Static and dynamic network visualization with R](https://kateto.net/network-visualization) (2021, Katherine Ognyanova).  
+
+* [Network Analysis and Visualization in R: Quick Start Guide](https://www.amazon.co.uk/dp/B077RHSB3Y/ref=dp-kindle-redirect?_encoding=UTF8&btkr=1) (2017, Alboukadel Kassambara).   
+
+* [A User’s Guide to Network Analysis in R](https://link.springer.com/book/10.1007/978-3-319-23883-8) (2015, Douglas Luke).   
+
 ## Network analysis  
 
-"Vertices" and "edges" seem to be the common terms used in network analysis books. Probably not as intuitive as the terms "nodes" and "links" used in some R packages. "Points" and "lines" would probably not differentiate it enough from a regular x and y axis graph. "Junctions" and "roads" too metaphorical? The "amount of traffic", "weight", "size of flow", "value", "edge attribute", all relate to how much is passing from one vertex to another.
+*Vertices* and *edges* seem to be the key terms used in network analysis books. Probably not as intuitive as the terms *nodes* and *links* used in some R packages. *Points* and *lines* would probably not differentiate it enough from a regular x and y axis graph. *Junctions* and *roads* too metaphorical? The *amount of traffic*, *weight*, *size of flow*, *value*, *edge attribute*, all relate to how much is passing from one vertex to another.  
 
-[Introduction to Network Analysis with R](https://www.jessesadler.com/post/network-analysis-with-r/)  
+In addition to other types of network visualisation, such as chord or weighted arc diagrams, network analysis is useful where connections rather than transactions are the priority.    
 
-Chapter on [Network analysis with R](https://thomasdegraaff.nl/ResearchTools/network-analysis-with-r.html) from [Research Tools for Social Scientists](https://thomasdegraaff.nl/ResearchTools/index.html).  
+> Graph databases store data so that finding relationships is the primary priority. This contrasts with traditional databases where finding transactions is the primary priority.
 
-[Network Analysis and Visualization with R and igraph](https://kateto.net/netscix2016.html)  
-
-[Network Analysis and Visualization in R: Quick Start Guide](https://www.amazon.co.uk/dp/B077RHSB3Y/ref=dp-kindle-redirect?_encoding=UTF8&btkr=1)  
-
-[A User’s Guide to Network Analysis in R](https://link.springer.com/book/10.1007/978-3-319-23883-8)  
 
 ## networkD3 package
 
@@ -74,8 +89,11 @@ These notes are going to focus on using the `networkD3` R package:
 
 Other Sankey and Alluvial specific packages were considered. However, `networkD3` seemed the best bet in terms of package maintenance and examples. Plus, familiarity with the package could help us produce other types of network diagrams. Consideration of other packages was not especially thorough.
 
-The example followed initially in the CEH project was:
-[Most basic Sankey Diagram – the R Graph Gallery (r-graph-gallery.com)](https://r-graph-gallery.com/321-introduction-to-interactive-sankey-diagram-2.html). However, the [R Gallery Book](https://bookdown.org/content/b298e479-b1ab-49fa-b83d-a57c2b034d49/flow.html#sankey-diagram) would have been better.
+> The networkD3 package offers useful, convenient ways for non-Javascript programmers to make use of many of the great capabilities of the D3 visualisation library. However, the package’s customization potential is limited. For those who can program in D3, the scope exists to create amazing interactive graph visualisations, with limitless customization potential.
+
+We don't need the Sankey to be dynamic and interactive for CEH. Certainly not initially for the high level group visualisations. However, Sankey's quickly become unwieldy with too much information, which is where the interaction, the ability for the reader to explore the diagram, is useful. Additionaly, the D3 options for Sankey are simpler to use than to build a static alternative. In short, some JavaScript looks unavoidable. Reassuringly, Hadley Wickham tweeted recently that he expected JavaScript to be tied to the future of R visualisations, so it's a good skill to invest in.
+
+James Ford has asked about the possibility of a *Sankey Pivot* - a Sankey where different aspects can be selected. Maybe something like this, [observablehq.com/@d3/sankey](https://observablehq.com/@d3/sankey), but with, for example, being able to select of types of Early Help, rather than link colour. Including the Sankey in a [flexdashboard](https://scc-pi.github.io/pinsheff/rmd.html#flexdashboard) might be the easiest way to accomplish this and avoid too much JavaScript.
 
 # Sankey example  
 
@@ -168,7 +186,7 @@ ceh_graph <- graph_from_data_frame(
 )
 
 # Convert to object suitable for networkD3
-# One data frame of 'links' and another of 'nodes' returned in a list.
+# One data frame of 'links' and another of 'nodes' returned in a list
 ceh_d3 <- igraph_to_networkD3(ceh_graph, what = "both")
 
 # Display links table
@@ -190,11 +208,63 @@ sankeyNetwork(
   NodeID = "name",
   nodeWidth = 40,
   fontSize = 13,
-  nodePadding = 20
+  nodePadding = 20,
+  units = "children"
 )
 ```
 
 # Colours  
+
+[Colour specific node in igraph](https://stackoverflow.com/questions/31992685/colour-specific-node-in-igraph)
+
+# Node attributes  
+
+Need to use groups, memberships, communities etc.
+
+```{r node-attributes}
+ceh_d3$nodes$vertex.color <- "blue"
+#V(mp_graph)$colour
+
+# ceh_nodes <- mutate(ceh_nodes, clr = "red")
+# 
+# ceh_graph <- graph_from_data_frame(
+#   ceh_connections, 
+#   vertices = ceh_nodes, #data frame with vertex metadata
+#   directed = TRUE
+# )
+# 
+# ceh_graph <- set_vertex_attr(ceh_graph, name = "clr", value = "blue")
+
+
+# Convert to object suitable for networkD3
+# One data frame of 'links' and another of 'nodes' returned in a list
+ceh_d3 <- igraph_to_networkD3(ceh_graph, what = "both")
+
+# # Display links table
+# ceh_d3$links %>% 
+#   display_tbl %>% 
+#   fmt_number(columns = value, decimals = 0, use_seps = TRUE)
+
+# Display nodes table
+ceh_d3$nodes %>% 
+  display_tbl()
+
+# Display D3 Sankey diagram
+sankeyNetwork(
+  Links = ceh_d3$links, 
+  Nodes = ceh_d3$nodes,
+  Source = "source", 
+  Target = "target", 
+  Value = "value",
+  NodeID = "name",
+  nodeWidth = 40,
+  fontSize = 13,
+  nodePadding = 20
+)
+```
+
+
+
 
 
 # Add tooltips
