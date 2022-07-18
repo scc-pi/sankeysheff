@@ -95,7 +95,7 @@ We don't need the Sankey to be dynamic and interactive for CEH. Certainly not in
 
 James Ford has asked about the possibility of a *Sankey Pivot* - a Sankey where different aspects can be selected. Maybe something like this, [observablehq.com/@d3/sankey](https://observablehq.com/@d3/sankey), but with, for example, being able to select of types of Early Help, rather than link colour. Including the Sankey in a [flexdashboard](https://scc-pi.github.io/pinsheff/rmd.html#flexdashboard) might be the easiest way to accomplish this and avoid too much JavaScript.
 
-# Handbook example
+# Handbook Sankey example
 
 Sankey example from the Handbook in [3.1.5 Interactive graph visualization using 'networkD3'](https://ona-book.org/viz-graphs.html#interactive-graph-visualization-using-networkd3).
 
@@ -133,17 +133,14 @@ networkD3::sankeyNetwork(
 ```
 
 
-# Sankey example  
+# Another Sankey example  
 
-We've had some reasonable success with initial Sankey outputs in the CEH project. As ever though, there's room to improve how legible and reusable our code is. We're also starting to look into a level of control that requires JavaScript.  
-
-We're going to look at a couple of things initially: 
-
-1. A good outline of the Sankey process using the `networkD3` package - 
+A good outline of the Sankey process using the `networkD3` package - 
 [RPubs - Introduction to Creating Sankey diagrams for Educational Research In R](https://rpubs.com/droach/CPP526-codethrough).  
-1. Using the [`igraph` R package](https://igraph.org/r/) as suggested by the [`networkD3` documentation](https://christophergandrud.github.io/networkD3/#igraph).
 
-## Sample data 
+*TODO?*
+
+# Dummy CEH data 
 
 ```{r ceh-simple-png}
 #| echo=FALSE,
@@ -209,7 +206,9 @@ ceh_connections %>%
   fmt_number(columns = CHILDREN, decimals = 0, use_seps = TRUE)
 ```
 
-## igraph  
+## igraph example  
+
+Using the [`igraph` R package](https://igraph.org/r/) as suggested by the [`networkD3` documentation](https://christophergandrud.github.io/networkD3/#igraph).
 
 Using `igraph` might be akin to the use of data standards and APIs i.e. a useful agreed common format, for network analysis. Initially it's use appears an unnecessary complication, but down the line its value may become more apparent.  
 
@@ -250,6 +249,190 @@ sankeyNetwork(
   units = "children"
 )
 ```
+
+# Current function
+
+```{r current}
+# Sankey of different Early Help & Social Care groups
+group_sankey <- function(grp_count, 
+                         sc_int_count = NULL,
+                         char_count = NULL){
+  
+  # NOTE: Sankey is D3 based, which unlike R has 0 based index
+  
+  # Create a frame for a Children's Early Help groups Sankey
+  eip_grps_sk_frm <- tribble(
+    ~SOURCE,      ~ID_SOURCE, ~TARGET,      ~ID_TARGET,     
+    "Children",   0,          "1 SC",       1,
+    "Children",   0,          "Early Help", 2,
+    "Early Help", 2,          "2 EH SC",    3,
+    "Early Help", 2,          "3 EH",       4
+  )
+  
+  # 2nd function argument?
+  if (!is.null(sc_int_count)) {
+    # Create a frame for a Children's SC interventions Sankey
+    sc_int_sk_frm <- tribble(
+      ~SOURCE,      ~ID_SOURCE, ~TARGET,      ~ID_TARGET,
+      "1 SC",       1,          "CIN",        2,
+      "1 SC",       1,          "CPP",        3,
+      "1 SC",       1,          "CLA",        4,
+      "2 EH SC",    5,          "CIN",        2,
+      "2 EH SC",    5,          "CPP",        3,
+      "2 EH SC",    5,          "CLA",        4
+    )
+
+    # Add to SC interventions to main Sankey frame
+    eip_grps_sk_frm <- eip_grps_sk_frm %>%
+      mutate(
+        ID_TARGET = if_else(ID_TARGET > 1, ID_TARGET + 3, ID_TARGET),
+        ID_SOURCE = if_else(ID_SOURCE > 1, ID_SOURCE + 3, ID_SOURCE)
+      ) %>%
+      bind_rows(sc_int_sk_frm)
+  }
+  
+  # 3rd function argument?
+  if (is.null(char_count)) {
+    char_rows <- 0
+  } else {
+    
+    # Number of different categories in the characteristic
+    char_rows <- nrow(char_count)
+    
+    # Assume first column has the category names!
+    char_count <- rename(char_count, SOURCE = 1)
+    
+    # Create a frame for a Children's characteristics Sankey
+    char_count_sk_frm <- char_count %>% 
+      select(SOURCE) %>%
+      mutate(
+        ID_SOURCE = row_number() - 1,
+        TARGET = "Children", 
+        ID_TARGET = char_rows
+      )
+
+    # Add to characteristic categories to main Sankey frame
+    eip_grps_sk_frm <- eip_grps_sk_frm %>%
+      mutate(
+        ID_TARGET = ID_TARGET + char_rows,
+        ID_SOURCE = ID_SOURCE + char_rows
+      ) %>%
+      bind_rows(char_count_sk_frm, .) #put char. rows at the top
+  }
+  
+  # How many children in total?
+  child_count <- grp_count %>% 
+    count(wt = CHILDREN) %>% 
+    pluck(1,1)
+  
+  # How many child had Early Help in total?
+  early_help_child_count <- grp_count %>% 
+    filter(str_detect(GROUP, "EH")) %>% 
+    select(-GROUP) %>% 
+    count(wt = CHILDREN) %>% 
+    pluck(1,1)
+  
+  # Add the values to our Sankey frame 
+  eip_grps_sk <- eip_grps_sk_frm %>% 
+    left_join(grp_count, by = c("TARGET" = "GROUP")) %>% 
+    # 2nd argument?
+    { 
+      if (!is.null(sc_int_count)) {
+        left_join(
+          ., 
+          sc_int_count,
+          by = c("SOURCE" = "GROUP", "TARGET" = "INTERVENTION_TYPE")
+        ) %>% 
+        mutate(
+            CHILDREN = if_else(is.na(CHILDREN.x), CHILDREN.y, CHILDREN.x)
+        ) %>% 
+        select(-CHILDREN.x, -CHILDREN.y)
+      } else {
+        .
+      }
+    } %>%
+    # 3rd argument?
+    { 
+      if (!is.null(char_count)) {
+        left_join(., char_count, by = "SOURCE") %>% 
+        mutate(
+            CHILDREN = if_else(is.na(CHILDREN.x), CHILDREN.y, CHILDREN.x)
+        ) %>% 
+        select(-CHILDREN.x, -CHILDREN.y)
+      } else {
+        .
+      }
+    } %>%
+    mutate(CHILDREN = if_else(TARGET == "Early Help",
+                              early_help_child_count,
+                              CHILDREN)) %>%
+    mutate(CHILDREN_PCT = round(CHILDREN/child_count, 2)) %>%
+    data.frame()
+  
+  # SANKEY NODES (LABELS) ...
+  
+  # Children is the only node with total number rather than a percentage
+  children_node <- tribble(
+    ~NAME,
+    str_c("Children (", format(round(child_count, -2), big.mark = ","),")")
+  )
+  
+  # Build up from source nodes  
+  if (is.null(char_count)) {
+    nodes <- children_node
+  } else {
+    nodes <- eip_grps_sk %>% 
+      filter(ID_SOURCE < char_rows) %>%
+      mutate(NAME = str_c(SOURCE, " (", CHILDREN_PCT*100 ,"%)")) %>%
+      arrange(ID_SOURCE) %>%
+      select(NAME) %>%
+      bind_rows(children_node)
+  }
+  
+  # Add target nodes
+  nodes <- eip_grps_sk %>%
+    filter(ID_TARGET > char_rows) %>% 
+    {
+      if (!is.null(sc_int_count)) {
+        count(., TARGET, ID_TARGET, wt = CHILDREN_PCT, name = "CHILDREN_PCT")
+      } else {
+        .
+      }
+    } %>%
+  mutate(NAME = str_c(TARGET, " (", CHILDREN_PCT*100 ,"%)")) %>%
+  arrange(ID_TARGET) %>%
+  select(NAME) %>% #
+  bind_rows(nodes, .) %>%
+  mutate(INDEX = row_number() - 1, .before = NAME) %>%
+  data.frame()
+  
+  # # DEBUG ----
+  # browser()
+  # writexl::write_xlsx(list(frame = eip_grps_sk, nodes = nodes),
+  #                     "data/debug-sankey.xlsx")
+  
+  # Prepare colour scale
+  colour_scale ='d3.scaleOrdinal() .range(["#FDE725FF","#B4DE2CFF","#6DCD59FF","#35B779FF","#1F9E89FF","#26828EFF","#31688EFF","#3E4A89FF","#482878FF","#440154FF"])'
+    
+  # Make the Sankey
+  sankeyNetwork(
+    Links = eip_grps_sk, 
+    Nodes = nodes,
+    Source = "ID_SOURCE", 
+    Target = "ID_TARGET",
+    Value = "CHILDREN_PCT", 
+    NodeID = "NAME",
+    sinksRight = TRUE, 
+    colourScale = colour_scale, 
+    nodeWidth = 40, 
+    fontSize = 13, 
+    nodePadding = 20
+  )
+}
+```
+
+
+
 
 # Colours  
 
