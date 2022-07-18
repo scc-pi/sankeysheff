@@ -95,6 +95,44 @@ We don't need the Sankey to be dynamic and interactive for CEH. Certainly not in
 
 James Ford has asked about the possibility of a *Sankey Pivot* - a Sankey where different aspects can be selected. Maybe something like this, [observablehq.com/@d3/sankey](https://observablehq.com/@d3/sankey), but with, for example, being able to select of types of Early Help, rather than link colour. Including the Sankey in a [flexdashboard](https://scc-pi.github.io/pinsheff/rmd.html#flexdashboard) might be the easiest way to accomplish this and avoid too much JavaScript.
 
+# Handbook example
+
+Sankey example from the Handbook in [3.1.5 Interactive graph visualization using 'networkD3'](https://ona-book.org/viz-graphs.html#interactive-graph-visualization-using-networkd3).
+
+```{r handbook-eg}
+# get data
+eu_referendum <- read.csv(
+  "https://ona-book.org/data/eu_referendum.csv"
+)
+
+# aggregate by region
+results <- eu_referendum |>  
+  dplyr::group_by(Region) |> 
+  dplyr::summarise(Remain = sum(Remain), Leave = sum(Leave)) |> 
+  tidyr::pivot_longer(-Region, names_to = "result", 
+                      values_to = "votes")
+
+# create unique regions, "Leave" and "Remain" for nodes dataframe
+regions <- unique(results$Region)
+nodes <- data.frame(node = c(0:13), 
+                    name = c(regions, "Leave", "Remain"))
+
+# create edges/links dataframe
+results <- results |> 
+  dplyr::inner_join(nodes, by = c("Region" = "name")) |> 
+  dplyr::inner_join(nodes, by = c("result" = "name"))
+
+links <- results[ , c("node.x", "node.y", "votes")]
+colnames(links) <- c("source", "target", "value")
+
+# visualize using sankeyNetwork
+networkD3::sankeyNetwork(
+  Links = links, Nodes = nodes, Source = 'source', Target = 'target', 
+  Value = 'value', NodeID = 'name', units = 'votes', fontSize = 12
+)
+```
+
+
 # Sankey example  
 
 We've had some reasonable success with initial Sankey outputs in the CEH project. As ever though, there's room to improve how legible and reusable our code is. We're also starting to look into a level of control that requires JavaScript.  
@@ -114,7 +152,7 @@ We're going to look at a couple of things initially:
 knitr::include_graphics("resources/EH-Map-v.simple.png")
 ```
 
-We'll use the groupings we have of children that receive either Early Help or Social Care interventions.
+We'll use the groupings we have of children that receive either Social Care interventions (group 1), Early Help engagements (group 3), or both (group 2).
 
 <div class="row"/>  
 
